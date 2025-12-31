@@ -189,15 +189,15 @@ El sistema está estructurado no como un stack típico de microservicios, sino c
 │                    El Stack Cognitivo                          │
 ├────────────────────────────────────────────────────────────────┤
 │                                                                │
-│  E0: Sentidos   →  Tensores Normalizados                      │
+│  E0: Sentidos   →  Tensores Normalizados                       │
 │       ↓                                                        │
-│  E1: Córtex     →  Grafo Causal                               │
+│  E1: Córtex     →  Grafo Causal                                │
 │       ↓                                                        │
-│  E2: Ejecutivo  →  Candidato de Acción Segura ←→ Bucle Rechazo│
+│  E2: Ejecutivo  →  Candidato de Acción Segura ←→ Bucle Rechazo │
 │       ↓                                                        │
-│  E3: Estratega  →  Plan Óptimo                                │
+│  E3: Estratega  →  Plan Óptimo                                 │
 │       ↓                                                        │
-│  E4: Self       →  Asignación de Recursos                     │
+│  E4: Self       →  Asignación de Recursos                      │
 │                                                                │
 │  Datos fluyen ARRIBA (Abstracción) | Control fluye ABAJO (Guía)│
-└─────────────────────────────────────────
+└────────────────────────────────────────────────────────────────
