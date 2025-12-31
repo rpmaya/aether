@@ -176,48 +176,7 @@ Una jerarquía rígida (CEO → VP → Manager) tiene **Baja Variedad**. Colapsa
 
 > "Existir es minimizar la sorpresa." — Karl Friston, 2010.
 
-La IA tradicional es "Feed-Forward" (Input → Output). ÆTHER es "Inferencia Activa" (Predicción → Error → Corrección). El sistema mantiene un **Gemelo Digital** (Modelo Generativo) de la empresa y lo compara constantemente con la realidad.
-
-**Ejemplo:**
-- **Predicción**: El inventario debería estar al 80%.
-- **Input Sensorial (E0)**: El inventario está al 40%.
-- **Sorpresa (Energía Libre)**: Alta.
-- **Acción**: Ordenar reposición inmediatamente.
-
-```
-┌─────────────────────────────────────────────────┐
-│           Bucle de Inferencia Activa            │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│   Modelo Interno ──→ Predicción                 │
-│        ↑                  ↓                     │
-│   Actualizar Modelo Expectativas Sensoriales    │
-│        ↑                  ↓                     │
-│   Sorpresa/Error ←── Datos del Mundo Real       │
-│        │                                        │
-│        └──→ Acción Activa (Cambiar el Mundo)    │
-│                                                 │
-└─────────────────────────────────────────────────┘
-```
-
-> 📝 **NOTA - DECISIÓN REQUERIDA**
-> 
-> El vínculo entre Friston y la implementación real es actualmente débil. El equipo debe decidir:
-> 
-> **Opción A: Mantener como inspiración filosófica**
-> - Reducir esta sección a 1 párrafo
-> - Presentarlo como "marco conceptual" sin pretender implementación formal
-> - Pro: Honesto, evita overselling
-> - Con: Pierde profundidad intelectual
-> 
-> **Opción B: Formalizar matemáticamente**
-> - Añadir las ecuaciones de Minimización de Energía Libre
-> - Mostrar cómo el bucle E0→E1→E2 implementa inferencia variacional
-> - Definir la función de loss como Energía Libre
-> - Pro: Diferenciador técnico fuerte
-> - Con: Requiere validación experimental real
-> 
-> **Recomendación:** Opción A para v1 del whitepaper, Opción B para paper académico posterior.
+El Principio de Energía Libre de Friston proporciona el **marco conceptual** que inspira la arquitectura de ÆTHER. A diferencia de la IA tradicional "Feed-Forward" (Input → Output), ÆTHER opera como un sistema de **Inferencia Activa**: mantiene un modelo interno del estado de la empresa (Gemelo Digital), genera predicciones continuas, detecta discrepancias con la realidad ("sorpresa"), y actúa para minimizarlas. Este bucle Predicción → Error → Corrección → Acción es el patrón fundamental que conecta las capas E0 (percepción) → E1 (modelado) → E2 (acción validada). Aunque la implementación actual no pretende ser una formalización matemática completa del marco de Friston, este principio guía nuestras decisiones de diseño: un sistema que no solo reacciona a datos, sino que activamente busca reducir la incertidumbre organizacional.
 
 ---
 
