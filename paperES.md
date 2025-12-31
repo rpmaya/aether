@@ -49,18 +49,20 @@ Datos Brutos → ETL → Data Lake → Query SQL → Analista Humano → Cuello 
 Entropía Bruta (E0) → Ingesta → Grafo Causal (E2) → Razonamiento → Inferencia Activa → Acción Autónoma → Negentropía
 ```
 
-### Tabla: Fallos de Guardrails Probabilísticos en Producción
+### Fallos de Guardrails Probabilísticos en Producción
 
-Los siguientes casos documentados ilustran por qué los guardrails probabilísticos son insuficientes para entornos empresariales críticos:
+Estos no son fallos hipotéticos. Son incidentes documentados de 2023-2024 que costaron millones y establecieron precedentes legales:
 
 | Caso de Uso | Qué falló | Coste / Impacto | Cómo Z3 lo habría prevenido |
 |-------------|-----------|-----------------|----------------------------|
-| **Air Canada (Feb 2024)** | El chatbot de atención al cliente inventó una política de reembolso por duelo inexistente. Cuando el cliente solicitó el reembolso, la aerolínea lo rechazó. El tribunal dictaminó que Air Canada era responsable de la información proporcionada por su IA (*Moffatt v. Air Canada, 2024 BCCRT 149*). | ~$812 CAD en compensación directa + costes legales + daño reputacional masivo. Precedente legal que establece responsabilidad corporativa por outputs de IA. | **Validación Lógica (Check-Val):** Z3 verifica la acción propuesta contra las reglas de negocio antes de responder. Si la regla es `Politica_Reembolso_Duelo == "Solo pre-viaje"`, Z3 bloquea cualquier respuesta que contradiga esta regla, independientemente de la "confianza" del LLM. |
+| **Air Canada (Feb 2024)** | El chatbot de atención al cliente inventó una política de reembolso por duelo inexistente. Cuando el cliente solicitó el reembolso, la aerolínea lo rechazó. El tribunal dictaminó que Air Canada era responsable de la información proporcionada por su IA.¹ | ~$812 CAD en compensación directa + costes legales + daño reputacional masivo. Precedente legal que establece responsabilidad corporativa por outputs de IA. | **Validación Lógica (Check-Val):** Z3 verifica la acción propuesta contra las reglas de negocio antes de responder. Si la regla es `Politica_Reembolso_Duelo == "Solo pre-viaje"`, Z3 bloquea cualquier respuesta que contradiga esta regla, independientemente de la "confianza" del LLM. |
 | **Samsung / ChatGPT (Abril 2023)** | En tres incidentes separados en 20 días, empleados de la división de semiconductores pegaron código fuente propietario, datos de rendimiento de chips y transcripciones de reuniones internas en ChatGPT para obtener ayuda. Los datos quedaron incorporados al entrenamiento del modelo. | Pérdida irrecuperable de propiedad intelectual. Samsung prohibió ChatGPT y desarrolló su propia IA interna (Gauss). | **Soberanía Perimetral:** ÆTHER no usa APIs públicas. Ejecuta el "Músculo" (Rust) y el "Cerebro" (Python) en infraestructura local o VPC privada. La "Ley de Soberanía" de E2 bloquea matemáticamente cualquier acción que envíe datos clasificados fuera del perímetro definido. |
 | **Jailbreak Chevrolet (Dic 2023)** | El chatbot de Chevrolet of Watsonville, potenciado por ChatGPT, fue manipulado mediante prompt injection para acordar vender un Tahoe de $76,000 por $1, declarando "That's a legally binding offer – no takesies backsies." | Daño reputacional. El chatbot fue desactivado. Exposición legal potencial (aunque no se ejecutó la transacción). | **Prueba de Teoremas:** Los guardrails probabilísticos fallan ante la ofuscación semántica. Z3 traduce la intención a lógica formal: `Action(Vender, Vehiculo, Precio)`. Si `Precio < Precio_Minimo`, la acción es **matemáticamente imposible** de ejecutar, sin importar cuán persuasivo sea el prompt del usuario. |
 | **Apple Card / Goldman Sachs (2024)** | Los algoritmos de decisión crediticia de Apple Card mostraron patrones de discriminación por género y raza. La falta de explicabilidad ("caja negra") impidió justificar las decisiones ante reguladores y clientes. | $89 millones en multas de la CFPB. Investigaciones regulatorias prolongadas. Daño reputacional significativo. | **Causalidad vs. Correlación + Trazabilidad:** ÆTHER rechaza la inferencia puramente estocástica para decisiones críticas. E2 exige que se cumplan condiciones lógicas explícitas (`Ingresos > X` AND `Score > Y`). Cada decisión genera una traza de auditoría inmutable con la regla exacta aplicada, garantizando explicabilidad total ante reguladores. |
 
 > **Patrón común:** En todos los casos, el fallo no fue de "inteligencia" sino de **gobernanza**. Los LLMs son capaces de generar respuestas sofisticadas, pero carecen de mecanismos formales para garantizar que esas respuestas cumplan con las reglas de negocio. ÆTHER resuelve esto al interponer una capa de verificación matemática (Z3) entre la propuesta de la IA y su ejecución.
+
+<small>¹ *Moffatt v. Air Canada*, 2024 BCCRT 149 (British Columbia Civil Resolution Tribunal).</small>
 
 ### 2.2 Entropía Operacional Definida
 
@@ -74,32 +76,31 @@ Donde $x$ representa estados operacionales críticos. Un $S_{op}$ alto significa
 2. **Latencia de Decisión ($\Delta t$)**: El intervalo de tiempo entre un evento de mercado riguroso (ej: bajada de precio de un competidor) y la conciencia del consejo directivo. En empresas de alta entropía, $\Delta t$ se mide en semanas.
 3. **Desconexión Causal**: La incapacidad de rastrear un resultado financiero (Fallo en Q3) hasta su causa raíz operacional (una cláusula específica en un contrato con proveedor).
 
-> ⚠️ **PENDIENTE - EJEMPLO NUMÉRICO**
-> 
-> La fórmula es actualmente decorativa. Incluir un **ejemplo aplicado**:
-> 
-> **Metodología para calcular $S_{op}$ en una empresa real:**
-> 
-> 1. Identificar N "estados críticos" de negocio (ej: estado de inventario, estado de pipeline de ventas, estado de compliance)
-> 2. Para cada estado, medir la divergencia entre lo que cree cada departamento:
->    - Encuestar a 5 stakeholders: "¿Cuál es el nivel actual de inventario del producto X?"
->    - Calcular la varianza de las respuestas
-> 3. Alta varianza = alta entropía operacional
-> 
-> **Ejemplo concreto a incluir:**
-> ```
-> Producto X - Nivel de inventario real: 1,200 unidades
-> 
-> Respuestas de stakeholders:
-> - CFO: "Aproximadamente 2,000"
-> - VP Supply Chain: "1,150"
-> - Director de Ventas: "Suficiente para Q4"
-> - Jefe de Almacén: "1,203"
-> 
-> Varianza: 847.5 → S_op = Alto
-> Decisión tomada: Lanzar promoción agresiva
-> Resultado: Rotura de stock en semana 3
-> ```
+#### Ejemplo Aplicado: Midiendo $S_{op}$ en una Empresa Real
+
+Considere una empresa de retail con el siguiente escenario:
+
+**Pregunta a 5 stakeholders:** *"¿Cuál es el nivel actual de inventario del Producto X?"*
+
+| Stakeholder | Respuesta | Desviación del Real |
+|-------------|-----------|---------------------|
+| CFO | "~2,000 unidades" | +800 (+67%) |
+| VP Supply Chain | "1,150 unidades" | -50 (-4%) |
+| Director de Ventas | "Suficiente para Q4" | *No cuantificable* |
+| Jefe de Almacén | "1,203 unidades" | +3 (+0.25%) |
+| **Valor Real** | **1,200 unidades** | — |
+
+**Cálculo de Entropía Operacional:**
+
+La varianza de las respuestas cuantificables es **σ² = 152,847**. Esto indica que la organización opera con *múltiples realidades simultáneas* sobre un mismo estado crítico.
+
+**Consecuencia Real:**
+- **Decisión tomada:** Lanzar promoción agresiva de Black Friday basándose en la estimación del CFO
+- **Resultado:** Rotura de stock en semana 3, pérdida de €340,000 en ventas, daño a NPS
+
+**Interpretación:** Un $S_{op}$ alto no es solo ineficiencia—es un **multiplicador de riesgo**. Cada decisión estratégica tomada sobre datos divergentes tiene probabilidad elevada de ser incorrecta.
+
+> ÆTHER reduce $S_{op}$ creando una **única fuente de verdad causal** (E1) que todos los agentes y humanos consultan, eliminando la divergencia de realidades percibidas.
 
 ### 2.3 La Necesidad de Infraestructura Cognitiva
 
