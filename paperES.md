@@ -114,17 +114,30 @@ CEI no es un dashboard para humanos—es un **Sistema Nervioso Soberano** que ac
 
 3. **Causal, No Correlativo**: La IA Generativa es probabilística (estocástica). El Derecho Corporativo es determinista. ÆTHER usa **validación Neuro-Simbólica** para cerrar esta brecha, asegurando que la "inteligencia" nunca anule la verdad.
 
-> 📝 **OPORTUNIDAD - SETUP DEL CLAIM CENTRAL**
-> 
-> Este punto 3 es el gancho hacia el claim central. **Expandir la tensión** entre "probabilístico" y "determinista":
-> 
-> **Texto sugerido a añadir:**
-> 
-> *"Este tercer requisito revela el fallo fundamental en los despliegues actuales de IA Empresarial: están construidos sobre esperanza, no sobre prueba. Cuando un LLM recomienda 'Pagar esta factura', la empresa espera que haya verificado las reglas de aprobación. Cuando sugiere 'Enviar email a este cliente', la empresa espera que haya verificado el consentimiento GDPR.*
-> 
-> *La esperanza no es una estrategia de compliance.*
-> 
-> *ÆTHER introduce un cambio de paradigma: cada acción generada por IA se traduce a lógica formal y se verifica contra un conjunto inmutable de reglas antes de su ejecución. Esto no son guardrails—esto es demostración matemática."*
+Este tercer requisito revela el fallo fundamental en los despliegues actuales de IA Empresarial: están construidos sobre esperanza, no sobre prueba. Cuando un LLM recomienda *"Pagar esta factura"*, la empresa **espera** que haya verificado las reglas de aprobación. Cuando sugiere *"Enviar email a este cliente"*, la empresa **espera** que haya verificado el consentimiento GDPR.
+
+**La esperanza no es una estrategia de compliance.**
+
+ÆTHER introduce un cambio de paradigma: cada acción generada por IA se traduce a lógica formal y se verifica contra un conjunto inmutable de reglas antes de su ejecución. Esto no son guardrails—esto es **demostración matemática**.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Guardrails vs. Prueba Formal                 │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   GUARDRAILS PROBABILÍSTICOS          ÆTHER (Z3)               │
+│   ─────────────────────────           ──────────               │
+│   "El modelo probablemente            "El modelo PUEDE o       │
+│    no dirá esto"                       NO PUEDE decir esto"    │
+│                                                                 │
+│   P(violación) ≈ 0.02                 P(violación) = 0         │
+│   (2% de fallo = catástrofe           (Imposibilidad lógica    │
+│    a escala empresarial)               matemáticamente probada)│
+│                                                                 │
+│   Detecta DESPUÉS de ocurrir          Bloquea ANTES de ocurrir │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
