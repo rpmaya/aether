@@ -125,16 +125,16 @@ Este tercer requisito revela el fallo fundamental en los despliegues actuales de
 │                    Guardrails vs. Prueba Formal                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│   GUARDRAILS PROBABILÍSTICOS          ÆTHER (Z3)               │
-│   ─────────────────────────           ──────────               │
-│   "El modelo probablemente            "El modelo PUEDE o       │
-│    no dirá esto"                       NO PUEDE decir esto"    │
+│   GUARDRAILS PROBABILÍSTICOS          ÆTHER (Z3)                │
+│   ─────────────────────────           ──────────                │
+│   "El modelo probablemente            "El modelo PUEDE o        │
+│    no dirá esto"                       NO PUEDE decir esto"     │
 │                                                                 │
-│   P(violación) ≈ 0.02                 P(violación) = 0         │
-│   (2% de fallo = catástrofe           (Imposibilidad lógica    │
-│    a escala empresarial)               matemáticamente probada)│
+│   P(violación) ≈ 0.02                 P(violación) = 0          │
+│   (2% de fallo = catástrofe           (Imposibilidad lógica     │
+│    a escala empresarial)               matemáticamente probada) │
 │                                                                 │
-│   Detecta DESPUÉS de ocurrir          Bloquea ANTES de ocurrir │
+│   Detecta DESPUÉS de ocurrir          Bloquea ANTES de ocurrir  │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
