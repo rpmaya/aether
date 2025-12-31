@@ -49,17 +49,18 @@ Datos Brutos → ETL → Data Lake → Query SQL → Analista Humano → Cuello 
 Entropía Bruta (E0) → Ingesta → Grafo Causal (E2) → Razonamiento → Inferencia Activa → Acción Autónoma → Negentropía
 ```
 
-> ⚠️ **PENDIENTE - EVIDENCIA CRÍTICA**
-> 
-> Añadir **ejemplos concretos de fallos de guardrails probabilísticos** en producción. Esto establece el problema que Z3 resuelve.
-> 
-> **Casos sugeridos a investigar/documentar:**
-> - Incidentes públicos de LLMs corporativos que filtraron datos sensibles
-> - Casos de "jailbreak" en chatbots de atención al cliente
-> - Errores de IA en aprobación de créditos/seguros que resultaron en demandas
-> - El caso de Air Canada (chatbot que inventó políticas de reembolso)
-> 
-> **Formato recomendado:** Tabla con columna "Qué falló" | "Coste estimado" | "Cómo Z3 lo habría prevenido"
+### Tabla: Fallos de Guardrails Probabilísticos en Producción
+
+Los siguientes casos documentados ilustran por qué los guardrails probabilísticos son insuficientes para entornos empresariales críticos:
+
+| Caso de Uso | Qué falló | Coste / Impacto | Cómo Z3 lo habría prevenido |
+|-------------|-----------|-----------------|----------------------------|
+| **Air Canada (Feb 2024)** | El chatbot de atención al cliente inventó una política de reembolso por duelo inexistente. Cuando el cliente solicitó el reembolso, la aerolínea lo rechazó. El tribunal dictaminó que Air Canada era responsable de la información proporcionada por su IA (*Moffatt v. Air Canada, 2024 BCCRT 149*). | ~$812 CAD en compensación directa + costes legales + daño reputacional masivo. Precedente legal que establece responsabilidad corporativa por outputs de IA. | **Validación Lógica (Check-Val):** Z3 verifica la acción propuesta contra las reglas de negocio antes de responder. Si la regla es `Politica_Reembolso_Duelo == "Solo pre-viaje"`, Z3 bloquea cualquier respuesta que contradiga esta regla, independientemente de la "confianza" del LLM. |
+| **Samsung / ChatGPT (Abril 2023)** | En tres incidentes separados en 20 días, empleados de la división de semiconductores pegaron código fuente propietario, datos de rendimiento de chips y transcripciones de reuniones internas en ChatGPT para obtener ayuda. Los datos quedaron incorporados al entrenamiento del modelo. | Pérdida irrecuperable de propiedad intelectual. Samsung prohibió ChatGPT y desarrolló su propia IA interna (Gauss). | **Soberanía Perimetral:** ÆTHER no usa APIs públicas. Ejecuta el "Músculo" (Rust) y el "Cerebro" (Python) en infraestructura local o VPC privada. La "Ley de Soberanía" de E2 bloquea matemáticamente cualquier acción que envíe datos clasificados fuera del perímetro definido. |
+| **Jailbreak Chevrolet (Dic 2023)** | El chatbot de Chevrolet of Watsonville, potenciado por ChatGPT, fue manipulado mediante prompt injection para acordar vender un Tahoe de $76,000 por $1, declarando "That's a legally binding offer – no takesies backsies." | Daño reputacional. El chatbot fue desactivado. Exposición legal potencial (aunque no se ejecutó la transacción). | **Prueba de Teoremas:** Los guardrails probabilísticos fallan ante la ofuscación semántica. Z3 traduce la intención a lógica formal: `Action(Vender, Vehiculo, Precio)`. Si `Precio < Precio_Minimo`, la acción es **matemáticamente imposible** de ejecutar, sin importar cuán persuasivo sea el prompt del usuario. |
+| **Apple Card / Goldman Sachs (2024)** | Los algoritmos de decisión crediticia de Apple Card mostraron patrones de discriminación por género y raza. La falta de explicabilidad ("caja negra") impidió justificar las decisiones ante reguladores y clientes. | $89 millones en multas de la CFPB. Investigaciones regulatorias prolongadas. Daño reputacional significativo. | **Causalidad vs. Correlación + Trazabilidad:** ÆTHER rechaza la inferencia puramente estocástica para decisiones críticas. E2 exige que se cumplan condiciones lógicas explícitas (`Ingresos > X` AND `Score > Y`). Cada decisión genera una traza de auditoría inmutable con la regla exacta aplicada, garantizando explicabilidad total ante reguladores. |
+
+> **Patrón común:** En todos los casos, el fallo no fue de "inteligencia" sino de **gobernanza**. Los LLMs son capaces de generar respuestas sofisticadas, pero carecen de mecanismos formales para garantizar que esas respuestas cumplan con las reglas de negocio. ÆTHER resuelve esto al interponer una capa de verificación matemática (Z3) entre la propuesta de la IA y su ejecución.
 
 ### 2.2 Entropía Operacional Definida
 
