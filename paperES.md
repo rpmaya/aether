@@ -207,4 +207,343 @@ El sistema está estructurado no como un stack típico de microservicios, sino c
 │  E4: Self       →  Asignación de Recursos                      │
 │                                                                │
 │  Datos fluyen ARRIBA (Abstracción) | Control fluye ABAJO (Guía)│
-└────────────────────────────────────────────────────────────────
+└────────────────────────────────────────────────────────────────┘
+```
+
+### 4.1 E0: Los Sentidos (Ingesta Universal)
+
+#### 4.1.1 Metabolismo de Información y Reducción de Entropía
+
+E0 es la **Capa Perceptual** del sistema. Su mandato es la cobertura absoluta del sensorio empresarial. Gestiona la transición fundamental del Caos (datos no estructurados) al Tensor (representación matemática).
+
+- **Lógica**: Si no puede medirse, no puede gestionarse.
+- **El Problema con ETL**: Los pipelines tradicionales (Extract-Transform-Load) tienen "pérdidas". Aplanan documentos ricos en simples filas de BD, descartando el 90% del contexto (tamaño de fuente, cabeceras de email, tono emocional).
+- **La Solución ÆTHER**: Un motor de ingesta basado en Rust que trata cada archivo como una señal multidimensional.
+
+#### 4.1.2 Flujo Técnico
+
+1. **Ingesta**: Conectores (SharePoint, Slack, SQL, IoT) transmiten bytes brutos.
+2. **Normalización No Estructurada**: Unstructured.io + Parsers Personalizados convierten PDFs/Imágenes/Audio en bloques narrativos.
+3. **Codificación Tensorial**: Cada bloque se embebe en un espacio vectorial usando modelos de contexto amplio.
+4. **Marcado Temporal**: Cada punto de datos se etiqueta con $t_{evento}$ (cuándo ocurrió) y $t_{ingesta}$ (cuándo lo vimos) para permitir el seguimiento de causalidad.
+
+**Output**: Un stream normalizado de **Perceptos** (Unidades atómicas de información) listas para el córtex.
+
+### 4.2 E1: El Córtex (Contexto Causal)
+
+#### 4.2.1 Reconocimiento de Patrones y el Hipocampo
+
+E1 es donde el significado emerge del ruido. Es responsable del **Descubrimiento Causal** y la **Memoria a Largo Plazo**. Implementa el concepto de **Cero Olvido**.
+
+**Mecanismo 1: Construcción del Grafo Causal**
+- Usando técnicas GraphRAG, E1 crea nodos para cada Entidad (Persona, Contrato, Producto) y aristas para cada Relación.
+- Restricción: Verifica: ¿El Evento A siempre precede al Evento B? Si es así, fortalece la arista causal $A \to B$.
+
+**Mecanismo 2: El Hipocampo (Qdrant)**
+- La mayoría de LLMs tienen **Memoria de Pez** (ventana de contexto limitada).
+- E1 almacena cada Percepto en una Base de Datos Vectorial (Qdrant).
+- **Recuperación**: Cuando llega una nueva consulta, realiza una Búsqueda Híbrida (Vector Denso + Palabra Clave Dispersa) para obtener contexto relevante de años atrás.
+
+**¿Por qué Python?**: Esta capa requiere el rico ecosistema de PyTorch y LangChain (Python) para orquestar la lógica compleja de recuperación y actualización del grafo.
+
+### 4.3 E2: El Ejecutivo (Razonamiento y Validación)
+
+#### 4.3.1 Juicio, Lógica y el Córtex Prefrontal
+
+E2 es la **Capa de Gobernanza**. Es la única capa autorizada para aprobar una acción. En términos biológicos, proporciona **Inhibición**—deteniendo los pensamientos impulsivos "reptilianos" de la IA.
+
+#### 4.3.2 La Arquitectura Neuro-Simbólica (El Bucle "Check-Val")
+
+Las Redes Neuronales puras (LLMs) son **Probabilísticas** ($P(x) \approx 0.9$).
+El Derecho Empresarial es **Determinista** ($Verdadero/Falso$).
+
+E2 cierra esta brecha.
+
+**El Bucle Check-Val:**
+
+1. **Propuesta (Sistema 1)**: El LLM sugiere: *"Pagar factura #994 inmediatamente para evitar penalizaciones."*
+
+2. **Traducción**: E2 convierte esta intención en una declaración de lógica formal:
+   ```
+   Action(Pagar, Factura_994)
+   ```
+
+3. **Validación (Sistema 2)**: El **Demostrador de Teoremas Z3** verifica esta declaración contra la "Constitución Ética" (Reglas Duras):
+   ```
+   Verificación de Regla: Importe_Factura > 50k AND Firma_Aprobación == NULL => PROHIBIDO
+   ```
+
+4. **Veredicto**: La acción es **bloqueada**. El LLM se ve forzado a replanificar: *"Solicitar firma para factura #994"*.
+
+**Resultado: Seguridad Demostrable.** No esperamos que la IA siga las reglas; lo demostramos matemáticamente antes de la ejecución.
+
+### 4.4 E3: El Estratega (Simulación)
+
+#### 4.4.1 Imaginación y Razonamiento Contrafactual
+
+Si E2 es el Freno, E3 es el Volante. Permite a la empresa **recordar el futuro** ejecutando escenarios sobre el Grafo Causal antes de comprometer capital.
+
+**Capacidades:**
+
+- **Monte Carlo Tree Search (MCTS)**: Explora miles de caminos de decisión potenciales. *"Si subimos precios un 2%, ¿cuál es la probabilidad de Churn > 5%?"*
+
+- **Debate Agéntico**: Genera dos sub-agentes, `Red_Team` (Riesgo) y `Blue_Team` (Crecimiento), para debatir una estrategia. El consenso se sintetiza en una recomendación final.
+
+- **El Artefacto**: Produce un Memo Estratégico con intervalos de confianza.
+  - **Output**: *"Recomendación: Cambiar Proveedor. Confianza: 87%. Ahorro Proyectado: $2M."*
+
+**Tech**: Usa agentes LangChain para el debate y motores de simulación Python personalizados para la lógica MCTS.
+
+### 4.5 E4: El Self (Autonomía) [Roadmap 2027]
+
+#### 4.5.1 Auto-Preservación y el Gemelo Digital
+
+> ⚠️ E4 representa nuestro objetivo de desarrollo para 2027 y no está incluido en los despliegues actuales. Lo incluimos aquí por transparencia estratégica—inversores y partners deben entender no solo dónde está ÆTHER, sino hacia dónde va.
+
+Este es el destino del roadmap (2027). E4 convierte la infraestructura en un organismo vivo que busca sobrevivir y optimizarse a sí mismo.
+
+- **Mecanismo**: Un Gemelo Digital (Réplica Virtual) de toda la instalación ÆTHER ejecutándose en NVIDIA Omniverse.
+
+- **Bucle Homeostático**:
+  1. **Monitorizar**: "La latencia de ingesta en el Nodo 4 ha subido a 500ms."
+  2. **Diagnosticar**: "Causa raíz: Memory Leak en el pod del Parser PDF."
+  3. **Sanar**: "Acción: Matar Pod 4. Crear 2 nuevas réplicas. Redirigir tráfico."
+
+- **Objetivo**: Inmortalidad Operacional. El sistema corrige sus propios bugs y escala sus propios recursos sin despertar a un ingeniero humano.
+
+**Por Qué Importa**: A escala, la complejidad excede la capacidad humana de debugging. El sistema debe ser auto-sanante para sobrevivir.
+
+---
+
+## 5. Soberanía de Ingeniería: El Stack Tecnológico
+
+ÆTHER rechaza la filosofía del Modern Data Stack de ensamblar 20 APIs SaaS diferentes. Eso es una receta para latencia y fugas.
+
+En su lugar, adherimos a una **Arquitectura Híbrida monolítica**: *"Rust para el Músculo, Python para el Cerebro."*
+
+```
+┌─────────────────────────────────────────────────────────┐
+│              El Perímetro Soberano                      │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│   ┌─────────────────┐    PyO3 / Zero-Copy              │
+│   │   Núcleo Rust   │◄──────────────────────►┌────────┐│
+│   │                 │                        │ Python ││
+│   │  • Almacenamiento│                       │ Córtex ││
+│   │  • Red          │                        │        ││
+│   │  • Cifrado      │                        │ • IA   ││
+│   │  • Orquestación │                        │ Agentes││
+│   └─────────────────┘                        └────────┘│
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 5.1 El Backbone (Rust)
+
+El Cuerpo de ÆTHER (Ingesta, Networking, Criptografía, Almacenamiento Vectorial) está escrito en **Rust**. Esta decisión está impulsada por tres requisitos no negociables para infraestructura crítica:
+
+**1. Seguridad de Memoria sin Garbage Collection:**
+- **El Problema**: C++ permite "buffer overflows" (70% de CVEs de seguridad). Java/Go usan Garbage Collectors que causan picos de latencia impredecibles ("Stop-the-world").
+- **La Solución Rust**: El Borrow Checker impone la propiedad de memoria en tiempo de compilación. Esto garantiza que ÆTHER no puede crashear por errores de memoria, y ejecuta con la latencia predecible de un caza de combate.
+
+**2. Concurrencia sin Miedo (Tokio):**
+- Los datos empresariales son masivos. Confiamos en Async Rust (runtime `Tokio`) para manejar decenas de miles de streams I/O concurrentes (archivos, sockets, logs) por nodo con una huella de memoria mínima.
+
+**3. Desarrollo Dirigido por Tipos:**
+- Codificamos restricciones de lógica de negocio en el sistema de tipos. Es imposible compilar código que accidentalmente mezcle "Datos Brutos" con "Datos Saneados".
+
+**Crates Principales**: Tokio (Async I/O), Polars (Dataframes Hiper-rápidos), Tantivy (Motor de Búsqueda), Axum (API).
+
+### 5.2 El Córtex (Python)
+
+La Mente de ÆTHER (Agentes, Razonamiento, Llamadas LLM, Lógica de Grafo) está escrita en **Python**.
+
+**1. El Dominio del Ecosistema:**
+- La investigación en IA ocurre en Python (PyTorch, HuggingFace). Reimplementar esto en Rust es esfuerzo desperdiciado. Python nos permite integrar los últimos modelos SOTA (Llama 3, Mistral, GPT-4) horas después de su lanzamiento.
+
+**2. El Puente PyO3 (El Arma Secreta):**
+- **Enfoque Estándar**: Microservicios comunicándose via HTTP (Lento, Alta Latencia).
+- **Enfoque ÆTHER**: Embebemos el intérprete Python dentro del proceso Rust usando PyO3.
+- **Zero-Copy**: Los datos cargados por Rust (ej: un archivo parquet de 10GB) se exponen a Python como un puntero. Sin copia de memoria. Los agentes Python "piensan" sobre datos que Rust "sostiene".
+
+**3. Evolución Rápida de Lógica:**
+- La lógica cognitiva cambia semanalmente. Python nos permite intercambiar en caliente "Patrones de Pensamiento" (Cadenas de Prompts) sin recompilar el binario completo.
+
+### 5.3 La Membrana (Seguridad)
+
+ÆTHER asume un mundo **Zero Trust** y **Post-Cuántico**. No confiamos en la red. No confiamos en proveedores cloud. Confiamos en las matemáticas.
+
+**1. Air-Gapped y Soberano:**
+- ÆTHER está diseñado para ejecutarse en Bare Metal o VPCs Privadas. Ningún dato sale jamás del perímetro. Los "Pesos del Modelo" son locales.
+
+**2. Criptografía Post-Cuántica (PQC):**
+- **La Amenaza**: Almacenar Ahora, Descifrar Después. Los ordenadores cuánticos (Q-Day) romperán RSA-2048.
+- **La Defensa**: Toda comunicación interna está securizada usando Criptografía de Retículos estandarizada por NIST (Kyber para Encapsulación de Claves, Dilithium para Firmas). Nuestra seguridad es válida por 50 años.
+
+**3. Cifrado Completamente Homomórfico (FHE) [Fase de Investigación]:**
+- ✅ **Production Ready**: E0, E1, E2
+- 🔶 **Beta**: E3
+- 🔬 **Research**: E4, FHE
+
+- **El Santo Grial**: Estamos integrando la biblioteca Concrete de Zama.
+- **Capacidad**: Permite a la IA realizar búsqueda semántica y razonamiento sobre Datos Cifrados sin jamás descifrarlos.
+- **Caso de Uso**: La IA puede analizar Salarios de Empleados para detectar sesgo, pero la IA misma nunca ve números—solo texto cifrado. El resultado se devuelve cifrado. La privacidad está matemáticamente garantizada, no basada en políticas.
+
+---
+
+## 6. Roadmap de Implementación
+
+El despliegue de ÆTHER no es un switch-over Big Bang. Es un proceso de maduración biológica, análogo al desarrollo de un sistema nervioso. Seguimos una estricta evolución en **3 Fases** para gestionar riesgo y complejidad.
+
+```
+2026                                              2027
+Ene Feb Mar Abr May Jun Jul Ago Sep Oct Nov Dic | Ene Feb Mar Abr May Jun
+
+Fase I   ████████████
+         Núcleo Rust (E0)
+              ████████████████████
+              Contexto GraphRAG (E1)
+
+Fase II                      ████████████████
+                             Validador Lógico Z3 (E2)
+                                       ████████████
+                                       Simulación Monte Carlo (E3)
+
+Fase III                                              ████████████████
+                                                      Cierre Autónomo (E4)
+```
+
+### Milestones Específicos
+
+**Fase I - Fundación (Q1-Q2 2026)**
+- M1: E0 procesando 1M docs/día en producción
+- M2: Grafo E1 con 10M nodos, latencia de consulta sub-100ms
+- M3: Primer piloto empresarial desplegado
+
+**Fase II - Inteligencia (Q3-Q4 2026)**
+- M4: E2 validando 100% de acciones de IA en piloto
+- M5: Simulaciones E3 usadas en 3 decisiones estratégicas
+- M6: Segundo cliente empresarial firmado
+
+**Fase III - Autonomía (2027)**
+- M7: E4 auto-sanación demostrada en staging
+- M8: Prototipo FHE con carga de trabajo real
+- M9: Serie A / Ronda de Crecimiento
+
+---
+
+## 7. Aplicabilidad Empresarial y el Foso de Entropía
+
+### 7.1 El Foso de Entropía: Una Nueva Ventaja Competitiva
+
+Cada empresa acumula entropía operacional. La diferencia es si pueden metabolizarla en inteligencia más rápido que los competidores.
+
+ÆTHER crea una ventaja compuesta:
+- **Año 1**: Ponerse al día—reducir latencia de decisión a la media de la industria
+- **Año 3**: Adelantarse—el grafo causal permite predicciones que los competidores no pueden hacer
+- **Año 5**: Foso insuperable—el sistema conoce tu negocio mejor de lo que cualquier nuevo entrante podría aprender
+
+### 7.2 Aplicaciones por Industria
+
+| Industria | Principal Punto de Dolor | Solución ÆTHER | ROI Esperado |
+|-----------|-------------------------|----------------|---------------|
+| **Servicios Financieros** | Violaciones de compliance, fallos de auditoría | E2 valida cada operación/transacción | 80% reducción en incidentes de compliance |
+| **Manufactura** | Opacidad de cadena de suministro, desajuste de demanda | Grafo causal E1 vincula proveedores→inventario→ventas | 15% reducción en roturas de stock |
+| **Salud** | Responsabilidad en decisiones clínicas | E2 asegura que recomendaciones de IA siguen protocolos | Cero sugerencias de IA fuera de protocolo |
+| **Legal** | Riesgo contractual oculto en volumen de documentos | E0+E1 extrae y vincula obligaciones | 10x más rápido en due diligence |
+
+### 7.3 Modelos de Despliegue
+
+- **Cloud Soberano**: Instancia dedicada en la VPC del cliente
+- **On-Premise**: Bare metal para máxima seguridad (defensa, finanzas)
+- **Híbrido**: E0/E2 on-prem, simulaciones E3 en cloud seguro bajo demanda
+
+---
+
+## 8. Constitución Ética
+
+### 8.1 Las Tres Leyes de la IA Empresarial
+
+ÆTHER opera bajo una jerarquía de restricciones inviolables:
+
+1. **Ley de Prevención de Daño**: Ninguna acción que pueda causar daño físico, financiero o reputacional a humanos será ejecutada sin autorización humana explícita.
+
+2. **Ley de Transparencia**: Cada recomendación generada por IA debe ser trazable hasta sus datos fuente y cadena de razonamiento.
+
+3. **Ley de Soberanía**: Ningún dato saldrá del perímetro definido. Ningún modelo externo procesará datos sensibles sin cifrar.
+
+### 8.2 El Esquema de Reglas
+
+Las reglas en la Constitución Ética siguen un esquema formal que Z3 puede validar:
+
+```
+REGLA: [Identificador Único]
+ÁMBITO: [A qué acciones/entidades aplica]
+CONDICIÓN: [Predicado lógico]
+CONSECUENCIA: [PERMITIR | BLOQUEAR | ESCALAR]
+OVERRIDE: [Quién puede anular, si alguien]
+
+Ejemplo:
+REGLA: FIN-001
+ÁMBITO: Action(Pagar, Factura) WHERE Factura.importe > 50000
+CONDICIÓN: Aprobación.firmas.count >= 2 AND Aprobación.firmas.nivel >= "Director"
+CONSECUENCIA: BLOQUEAR si condición no se cumple
+OVERRIDE: CFO con justificación documentada
+```
+
+### 8.3 Auditabilidad y Explicabilidad
+
+Cada acción bloqueada genera un registro de auditoría inmutable:
+- Marca temporal
+- Acción propuesta (lenguaje natural + lógica formal)
+- Regla(s) activada(s)
+- Traza de prueba Z3
+- Resolución (acción replanificada o override humano)
+
+---
+
+## 9. Conclusión
+
+**El problema es claro**: La IA Empresarial tiene una crisis de confianza. Los guardrails probabilísticos han demostrado ser insuficientes—Air Canada, Samsung, Chevrolet y Apple Card son solo los casos públicos. Por cada incidente conocido, existen cientos de fallos silenciosos erosionando valor en empresas de todo el mundo.
+
+**La solución es demostrable**: ÆTHER introduce Gobernanza de IA Provable mediante la integración de verificación formal (Z3) en el núcleo de la arquitectura. No esperamos que la IA cumpla las reglas—demostramos matemáticamente que no puede violarlas antes de que cualquier acción se ejecute. Esto no es una mejora incremental; es un cambio de paradigma de probabilístico a determinista.
+
+**El momento es ahora**: Las empresas que adopten Infraestructura Cognitiva en 2026 construirán un foso de entropía que competidores tardíos no podrán cruzar. El conocimiento causal acumulado, la memoria institucional cristalizada en grafos, y la confianza ganada con reguladores se convierten en ventajas compuestas.
+
+**Invitamos** a inversores visionarios a unirse a nosotros en esta misión, y a empresas pioneras a participar en nuestro programa piloto. El futuro de la inteligencia empresarial no es probabilístico—es provable.
+
+---
+
+## Apéndice A: Glosario
+
+| Término | Definición |
+|---------|------------|
+| **Entropía Operacional ($S_{op}$)** | Medida de incertidumbre/desorden en el conocimiento de una organización sobre su propio estado |
+| **Negentropía** | Entropía negativa; la creación de orden a partir del desorden |
+| **Bucle Check-Val** | El ciclo de validación neuro-simbólica donde las propuestas del LLM son verificadas por Z3 |
+| **Z3** | Demostrador de teoremas open-source de Microsoft usado para verificación formal |
+| **Percepto** | Unidad atómica de información extraída por E0 |
+| **GraphRAG** | Generación Aumentada por Recuperación mejorada con estructura de grafo de conocimiento |
+| **FHE** | Cifrado Completamente Homomórfico; computación sobre datos cifrados |
+| **PQC** | Criptografía Post-Cuántica; algoritmos resistentes a ataques cuánticos |
+
+---
+
+## Apéndice B: Especificaciones Técnicas
+
+| Componente | Tecnología | Versión | Propósito |
+|------------|------------|---------|----------|
+| Runtime (Músculo) | Rust | 1.75+ | Infraestructura core |
+| Runtime Async | Tokio | 1.35+ | I/O Concurrente |
+| BD Vectorial | Qdrant | 1.7+ | Memoria semántica |
+| BD de Grafos | Neo4j | 5.x | Relaciones causales |
+| Demostrador de Teoremas | Z3 | 4.12+ | Validación formal |
+| Orquestación IA | LangChain | 0.1+ | Coordinación de agentes |
+| Modelos de Embedding | HuggingFace | Varios | Codificación semántica |
+| Puente | PyO3 | 0.20+ | Interop Rust-Python |
+
+---
+
+*Versión del Documento: 1.0*  
+*Última Actualización: Diciembre 2025*  
+*Clasificación: Público*
